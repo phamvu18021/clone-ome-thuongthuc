@@ -9,7 +9,10 @@ import Link from "next/link";
 import xss from "xss";
 import ButtonAnimation from "../atoms/ButtonAnimation";
 
-export default function Slide({ post, priority = false }: SlideProps & { priority?: boolean }) {
+export default function Slide({
+  post,
+  priority = false
+}: SlideProps & { priority?: boolean }) {
   const displayCategory =
     post.category || (post.categories && post.categories[0]) || "";
 
