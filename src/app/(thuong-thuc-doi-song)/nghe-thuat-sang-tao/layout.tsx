@@ -1,0 +1,23 @@
+import { getSeoData } from "@/src/utils/getSeoData";
+import { generateMetadataFromFullHead } from "@/src/utils/seoUtils";
+import { Metadata } from "next";
+import { ReactNode } from "react";
+import { GET_SEO_NGHE_THUAT_SANG_TAO } from "@/src/app/api/Graphql/ngheThuatSangTao";
+export const revalidate = 300;
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getSeoData(GET_SEO_NGHE_THUAT_SANG_TAO, "pageBy");
+
+  return {
+    ...generateMetadataFromFullHead(
+      seo.fullHead || "",
+      seo.focusKeywords || ""
+    ),
+    robots: "index, follow"
+  };
+}
+
+const Layout = ({ children }: { children: ReactNode }) => {
+  return <>{children}</>;
+};
+
+export default Layout;
