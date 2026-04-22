@@ -1,7 +1,5 @@
 "use client";
 
-import { Box } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import { ReactNode, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -16,6 +14,6 @@ export const ScrollView = ({ children }: { children: ReactNode }) => {
       setIsVisible(true);
     }
   }, [inView, isVisible]);
-  
+
   return <div ref={ref}>{isVisible && <>{children}</>}</div>;
 };

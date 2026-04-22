@@ -1,4 +1,5 @@
 "use client";
+import React, { Suspense } from "react";
 
 import NextIcon from "@/src/icons/NextIcon";
 import PreviousIcon from "@/src/icons/PreviousIcon";
@@ -100,7 +101,7 @@ export const StyledPaginate = styled(ReactPaginate)`
   }
 `;
 
-export const ListPosts = ({
+export const ListPostsInner = ({
   handleRouter,
   type
 }: {
@@ -241,5 +242,16 @@ export const ListPosts = ({
 
       {isLoading && <LoadingListPost count={10} col={1} />}
     </div>
+  );
+};
+
+export const ListPosts = (props: {
+  handleRouter?: ({ selected }: { selected: number }) => void;
+  type?: string;
+}) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ListPostsInner {...props} />
+    </Suspense>
   );
 };

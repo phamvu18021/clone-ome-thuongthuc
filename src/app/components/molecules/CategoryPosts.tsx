@@ -1,4 +1,5 @@
 "use client";
+import React, { Suspense } from "react";
 
 import { formatDate } from "@/src/utils/date";
 import {
@@ -17,7 +18,7 @@ import { ALLOWED_CATEGORIES } from "@/src/utils/category";
 import { menus } from "@/src/router/router";
 import { LoadingListPost } from "../atoms/LoadingListPost";
 
-export const CategoryPosts = () => {
+export const CategoryPostsInner = () => {
   const searchParams = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
   const first = 50000;
@@ -317,5 +318,13 @@ export const CategoryPosts = () => {
         </div>
       )}
     </div>
+  );
+};
+
+export const CategoryPosts = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CategoryPostsInner />
+    </Suspense>
   );
 };
