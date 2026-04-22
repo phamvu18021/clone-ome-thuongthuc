@@ -50,7 +50,7 @@ export default function SliderContent({
       >
         {posts.map((post, index) => (
           <div key={index} className="w-full flex-shrink-0">
-            <Slide post={post} />
+            <Slide post={post} priority={index === 0} />
           </div>
         ))}
       </div>

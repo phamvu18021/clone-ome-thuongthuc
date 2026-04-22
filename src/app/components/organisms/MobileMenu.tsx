@@ -142,6 +142,8 @@ export default function MobileMenu({
         <button
           className="text-gray-800 focus:outline-none"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle mobile menu"
+          aria-expanded={mobileMenuOpen}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

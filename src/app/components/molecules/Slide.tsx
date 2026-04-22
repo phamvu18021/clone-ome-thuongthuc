@@ -9,7 +9,7 @@ import Link from "next/link";
 import xss from "xss";
 import ButtonAnimation from "../atoms/ButtonAnimation";
 
-export default function Slide({ post }: SlideProps) {
+export default function Slide({ post, priority = false }: SlideProps & { priority?: boolean }) {
   const displayCategory =
     post.category || (post.categories && post.categories[0]) || "";
 
@@ -22,6 +22,7 @@ export default function Slide({ post }: SlideProps) {
           fill
           sizes="100vw"
           className="object-cover"
+          priority={priority}
         />
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>

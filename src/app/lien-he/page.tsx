@@ -32,6 +32,7 @@ export default function LienHe() {
         allowFullScreen
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
+        title="Bản đồ địa chỉ liên hệ Google Maps"
       />
     </LayoutDefault>
   );
