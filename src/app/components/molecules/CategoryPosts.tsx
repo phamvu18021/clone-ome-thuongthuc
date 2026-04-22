@@ -17,6 +17,51 @@ import LoadingOverlay from "../atoms/LoadingOverlay";
 import { ALLOWED_CATEGORIES } from "@/src/utils/category";
 import { menus } from "@/src/router/router";
 import { LoadingListPost } from "../atoms/LoadingListPost";
+export const CategorySkeleton = () => (
+  <>
+    <div className="max-w-[900px] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
+      <div className="relative rounded-md overflow-hidden aspect-[16/14] bg-gray-200 animate-pulse">
+        <div className="absolute bottom-6 left-6 right-6">
+          <div className="w-20 h-6 bg-gray-300 rounded-sm mb-2"></div>
+          <div className="h-8 bg-gray-300 rounded w-3/4 mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-1/2 mt-3"></div>
+        </div>
+      </div>
+      <div className="gap-3 flex flex-col justify-between">
+        {[0, 1].map((index) => (
+          <div
+            key={index}
+            className="flex space-x-4 items-center bg-white rounded-md"
+          >
+            <div className="relative flex-shrink-0 overflow-hidden rounded-md w-[180px] h-[180px] bg-gray-200 animate-pulse"></div>
+            <div className="flex flex-col justify-start">
+              <div className="w-40 h-[29px] bg-gray-300 rounded-sm mb-4"></div>
+              <div className="h-5 bg-gray-300 rounded w-28 mb-1"></div>
+              <div className="h-5 bg-gray-300 rounded w-3/4 mb-2"></div>
+              <div className="h-4 bg-gray-300 rounded w-1/3 mt-2"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div className="max-w-[900px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
+      {[0, 1].map((index) => (
+        <div
+          key={index}
+          className="flex space-x-4 items-center bg-white rounded-md"
+        >
+          <div className="relative flex-shrink-0 overflow-hidden rounded-md w-[180px] h-[180px] bg-gray-200 animate-pulse"></div>
+          <div className="flex flex-col justify-start">
+            <div className="w-40 h-[29px] bg-gray-300 rounded-sm mb-4"></div>
+            <div className="h-5 bg-gray-300 rounded w-28 mb-1"></div>
+            <div className="h-5 bg-gray-300 rounded w-3/4 mb-2"></div>
+            <div className="h-4 bg-gray-300 rounded w-1/3 mt-2"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>
+);
 
 export const CategoryPostsInner = () => {
   const searchParams = useSearchParams();
@@ -181,51 +226,7 @@ export const CategoryPostsInner = () => {
         </div>
       ) : (
         <div className="relative">
-          {isLoading && (
-            <>
-              <div className="max-w-[900px] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
-                <div className="relative rounded-md overflow-hidden aspect-[16/14] bg-gray-200 animate-pulse">
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="w-20 h-6 bg-gray-300 rounded-sm mb-2"></div>
-                    <div className="h-8 bg-gray-300 rounded w-3/4 mb-2"></div>
-                    <div className="h-4 bg-gray-300 rounded w-1/2 mt-3"></div>
-                  </div>
-                </div>
-                <div className="gap-3 flex flex-col justify-between">
-                  {[0, 1].map((index) => (
-                    <div
-                      key={index}
-                      className="flex space-x-4 items-center bg-white rounded-md"
-                    >
-                      <div className="relative flex-shrink-0 overflow-hidden rounded-md w-[180px] h-[180px] bg-gray-200 animate-pulse"></div>
-                      <div className="flex flex-col justify-start">
-                        <div className="w-40 h-[29px] bg-gray-300 rounded-sm mb-4"></div>
-                        <div className="h-5 bg-gray-300 rounded w-28 mb-1"></div>
-                        <div className="h-5 bg-gray-300 rounded w-3/4 mb-2"></div>
-                        <div className="h-4 bg-gray-300 rounded w-1/3 mt-2"></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="max-w-[900px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
-                {[0, 1].map((index) => (
-                  <div
-                    key={index}
-                    className="flex space-x-4 items-center bg-white rounded-md"
-                  >
-                    <div className="relative flex-shrink-0 overflow-hidden rounded-md w-[180px] h-[180px] bg-gray-200 animate-pulse"></div>
-                    <div className="flex flex-col justify-start">
-                      <div className="w-40 h-[29px] bg-gray-300 rounded-sm mb-4"></div>
-                      <div className="h-5 bg-gray-300 rounded w-28 mb-1"></div>
-                      <div className="h-5 bg-gray-300 rounded w-3/4 mb-2"></div>
-                      <div className="h-4 bg-gray-300 rounded w-1/3 mt-2"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
+          {isLoading && <CategorySkeleton />}
           <div className="max-w-[900px] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
             {filteredPosts.length > 0 && (
               <Link
@@ -323,8 +324,10 @@ export const CategoryPostsInner = () => {
 
 export const CategoryPosts = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <CategoryPostsInner />
-    </Suspense>
+    <div className="bg-white">
+      <Suspense fallback={<CategorySkeleton />}>
+        <CategoryPostsInner />
+      </Suspense>
+    </div>
   );
 };

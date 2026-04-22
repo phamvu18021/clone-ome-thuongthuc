@@ -64,7 +64,7 @@ export default function RootLayout({
         <div className="max-w-[1920px] mx-auto">
           <TrackingSession />
           <Navbar />
-          {children}
+          <main>{children}</main>
           <Footer />
           <Cta />
         </div>

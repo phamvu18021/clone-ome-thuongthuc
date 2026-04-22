@@ -250,7 +250,7 @@ export const ListPosts = (props: {
   type?: string;
 }) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LoadingListPost count={10} col={1} />}>
       <ListPostsInner {...props} />
     </Suspense>
   );
